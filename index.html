@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Từ vựng Tiếng Anh</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Quản lý Từ vựng Tiếng Anh</h1>
+    <p>
+      Nhập từ vựng bạn đã học. Nếu từ đã có, sẽ có thông báo! Nghĩa sẽ được dịch
+      tự động từ Google Dịch. Chỉ chấp nhận từ tiếng Anh hợp lệ.
+    </p>
+
+    <input
+      type="text"
+      id="vocabInput"
+      placeholder="Nhập từ vựng (ví dụ: apple)"
+    />
+    <button onclick="addVocab()">Thêm từ</button>
+
+    <div id="message" class="message"></div>
+
+    <h2>Danh sách từ vựng:</h2>
+    <ul id="vocabList"></ul>
+
+    <script src="main.js"></script>
+  </body>
+</html>
