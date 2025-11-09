@@ -1,4 +1,4 @@
-  // Hàm tải danh sách từ vựng từ localStorage
+ // Hàm tải danh sách từ vựng từ localStorage
         function loadVocab() {
             const vocabList = JSON.parse(localStorage.getItem('vocabList')) || [];
             const listElement = document.getElementById('vocabList');
@@ -42,6 +42,7 @@
             
             if (!word) {
                 message.textContent = 'Vui lòng nhập từ vựng!';
+                input.classList.add('error');
                 return;
             }
             
@@ -49,6 +50,7 @@
             const regex = /^[a-zA-Z]+$/;
             if (!regex.test(word)) {
                 message.textContent = 'Từ không hợp lệ hoặc không phải tiếng Anh. Vui lòng nhập từ tiếng Anh đúng!';
+                input.classList.add('error');
                 return;
             }
             
@@ -57,6 +59,7 @@
             
             if (existing) {
                 message.textContent = 'Từ này đã được thêm rồi!';
+                input.classList.add('error');
                 return;
             }
             
@@ -69,6 +72,7 @@
             if (!valid) {
                 message.classList.remove('loading');
                 message.textContent = 'Từ không hợp lệ hoặc không phải tiếng Anh. Vui lòng nhập từ tiếng Anh đúng!';
+                input.classList.add('error');
                 return;
             }
             
@@ -82,6 +86,7 @@
             
             message.classList.remove('loading');
             message.textContent = 'Đã thêm từ: ' + word;
+            input.classList.remove('error'); // Xóa lỗi khi thành công
             
             input.value = ''; // Xóa ô input
         }
@@ -94,6 +99,19 @@
             loadVocab(); // Cập nhật danh sách
             document.getElementById('message').textContent = 'Đã xóa từ: ' + word;
         }
+
+        // Event listener để xóa lỗi khi nhập lại
+        document.getElementById('vocabInput').addEventListener('input', function() {
+            this.classList.remove('error');
+            document.getElementById('message').textContent = '';
+        });
+
+        // Event listener để nhấn Enter thêm từ
+        document.getElementById('vocabInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                addVocab();
+            }
+        });
 
         // Tải danh sách khi trang load
         window.onload = loadVocab;
